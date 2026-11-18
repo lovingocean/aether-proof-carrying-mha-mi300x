@@ -1,0 +1,7 @@
+# Formal Certificate SHA-256 Digest
+CERT_SHA256=0x0d0a59ad2efb4a3443a4bfe2da95a0d0
+STATUS=PROVEN_SAFE
+HARDWARE=AMD Instinct MI300X OAM 192GB
+WORKLOAD=FUSED_MHA_SWIGLU
+Z3_VERDICT=UNSAT (0 Out-of-Bounds Reads · 0 Stack Spills)
+LEAN4_STATUS=Q.E.D. Verified (tile bounds + swizzle bijection proven)

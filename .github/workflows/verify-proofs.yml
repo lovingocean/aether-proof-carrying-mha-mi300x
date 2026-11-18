@@ -1,0 +1,30 @@
+name: Formal Safety & Bounds Verification
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+
+concurrency:
+  group: verify-proofs-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-formal-safety:
+    name: Z3 SMT Memory Bounds Check (Fused Causal Multi-Head Attention + SwiGLU Projection)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Z3 Theorem Prover
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y z3
+
+      - name: Run Z3 SMT-LIBv2 Bounds Proof
+        run: |
+          z3 -smt2 "proofs/bounds_z3_amd_mi300x_cdna3.smt2"
+          OUTPUT=$(z3 -smt2 "proofs/bounds_z3_amd_mi300x_cdna3.smt2" | tr -d '[:space:]')
+          echo "Z3 Verdict: $OUTPUT"
+          test "$OUTPUT" = "unsat"

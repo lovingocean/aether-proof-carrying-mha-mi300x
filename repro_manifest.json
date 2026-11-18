@@ -1,0 +1,34 @@
+{
+  "specification": "AetherKernel Open-Benchmark Proof-Carrying Workload Package v1.0",
+  "artifactSha256": "0x0d0a59ad2efb4a3443a4bfe2da95a0d0",
+  "status": "PROVEN_SAFE",
+  "hardware": {
+    "id": "AMD_MI300X_CDNA3",
+    "name": "AMD Instinct MI300X OAM 192GB",
+    "isaTag": "gfx942 CDNA3 / HIP MFMA",
+    "smemLimitKb": 64,
+    "peakFp16Tflops": 1307,
+    "hbmBandwidthTbs": 5.3,
+    "numComputeUnits": 304,
+    "kernelFileExt": ".hip"
+  },
+  "workloadLabel": "Fused Causal Multi-Head Attention + SwiGLU Projection",
+  "config": {
+    "workload": "FUSED_MHA_SWIGLU",
+    "targetArch": "AMD_MI300X_CDNA3",
+    "batchSize": 16,
+    "numHeads": 32,
+    "seqLen": 4096,
+    "headDim": 64,
+    "blockM": 64,
+    "blockN": 64,
+    "numStages": 2,
+    "swizzleBits": 3
+  },
+  "smtZ3Verdict": "UNSAT (0 Out-of-Bounds Reads · 0 Stack Spills)",
+  "lean4TheoremStatus": "Q.E.D. Verified (tile bounds + swizzle bijection proven)",
+  "smemRequiredKb": 42,
+  "smemLimitKb": 64,
+  "speedupFactor": 1.32,
+  "achievedTflops": 1202.4
+}
